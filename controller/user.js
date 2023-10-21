@@ -50,6 +50,7 @@ exports.signIn = (req, res, next) => {
           
           
           let transporter = nodemailer.createTransport({
+            port : process.env.PORT,
             service: "Gmail",
             auth: {
               user: process.env.GMAIL_USER, //  ethereal user
