@@ -33,7 +33,8 @@ exports.signIn = (req, res, next) => {
       if (user === null) {
         bcrypt.hash(req.body.password, 10, async (err, hashedPass) => {
           if (err) {
-            res.json({
+            console.log(err);
+            return res.json({
               error: err,
             });
           }
@@ -66,7 +67,8 @@ exports.signIn = (req, res, next) => {
           
           await transporter.sendMail(message, async (err, info) => {
             if(err){
-              res.json({
+              console.log(err);
+              return res.json({
                 valid : false,
                 message : "message not send"
               })
@@ -75,7 +77,7 @@ exports.signIn = (req, res, next) => {
               await newuser.save();
               console.log("Message sent: %s", info.messageId);
               console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-              res.json({
+              return res.json({
                 valid: true,
                 message: "Verification message is sent to your email",
               })
@@ -83,7 +85,7 @@ exports.signIn = (req, res, next) => {
           })
         });
       } else {
-        res.json({
+        return res.json({
           valid: false,
           message: "User already exist with this email!",
         });
