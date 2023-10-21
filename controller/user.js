@@ -138,7 +138,7 @@ exports.login = (req, res, next) => {
   User.findOne({ $or: [{ email: email }, { password: password }] }).then(
     (user, err) => {
       if (user === null) {
-        res.json({
+        return res.json({
           ok: false,
           message: "No user found!",
         });
