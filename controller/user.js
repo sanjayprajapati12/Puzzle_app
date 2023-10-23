@@ -59,7 +59,7 @@ exports.signIn = (req, res, next) => {
           });
 
           const message = {
-            from: `"Puzzle App" <sanjayprajapati19832002@gmail.com>`,
+            from: `"Puzzle App" <${process.env.GMAIL_USER}>`,
             to: req.body.email,
             subject: "Email verification",
             html: `Hello,<br> Please Click on the link and send the below token to verify your email.<br>
