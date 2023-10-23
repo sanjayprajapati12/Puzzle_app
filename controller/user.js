@@ -49,11 +49,15 @@ exports.signIn = (req, res, next) => {
           });
           
           let transporter = nodemailer.createTransport(smtpTransport({
+            tls:{
+              rejectUnauthorized:false
+            },
             host : 'smtp.gmail.com',
             port : 456,
             service: "Gmail",
             secure : true,
             auth: {
+              type : 'OAuth2',
               user: process.env.GMAIL_USER, //  ethereal user
               pass: process.env.GMAIL_PASS, //  ethereal password
             },
