@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const randomstr = require("randomstring");
 const nodemailer = require("nodemailer");
+const smtpTransport = require("nodemailer-smtp-transport")
 // import express from 'express';
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config/config.env" });
@@ -47,16 +48,16 @@ exports.signIn = (req, res, next) => {
             active: false,
           });
           
-          let transporter = nodemailer.createTransport({
+          let transporter = nodemailer.createTransport(smtpTransport({
             host : 'smtp.gmail.com',
             port : 456,
             service: "Gmail",
-            secure : 'true',
+            secure : true,
             auth: {
               user: process.env.GMAIL_USER, //  ethereal user
               pass: process.env.GMAIL_PASS, //  ethereal password
             },
-          });
+          }));
 
           const message = {
             from: `"Puzzle App" <${process.env.GMAIL_USER}>`,
