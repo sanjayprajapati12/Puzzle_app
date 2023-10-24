@@ -20,6 +20,7 @@
     "randomstring": "^1.2.3",
     "react-router-dom": "^6.11.1",
     "validator": "^13.9.0",
+    "vercel": "^32.5.0",
     "which": "^3.0.1"
   },
   "scripts": {
